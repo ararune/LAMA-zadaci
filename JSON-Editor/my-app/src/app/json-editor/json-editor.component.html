@@ -1,0 +1,6 @@
+<input type="file" (change)="onFileSelected($event)">
+<p>{{ fileContent }}</p>
+
+<pre *ngIf="parsedJson" contenteditable="true">{{ parsedJson | json }}</pre>
+
+<button (click)="onSave()">Save</button>

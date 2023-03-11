@@ -1,0 +1,41 @@
+{
+  "processPort": 3000,
+  "processPort1": 3001,
+  "_mail_main": {
+    "isEnabled": true,
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "auth": {
+      "user": "test",
+      "pass": "test"
+    }
+  },
+  "activeDirectory": {
+    "domains": [
+      {
+        "url": "ldap://test.lama.hr",
+        "domain": "@lama.hr"
+      }
+    ]
+  },
+  "razmjena": {
+    "libusoft": {
+      "cronJob": {
+        "cronTime": "0 0 0 * * *"
+      }
+    }
+  },
+  "SEUPeDelivery": {
+    "Primatelj": "Lama d.o.o.",
+    "Identifier": "11815662330",
+    "IPAuthCheck": true,
+    "_comment_IPAuthCheck": "ako je true, provjerava se IP adresa posiljatelja, ako je false, ne provjerava se",
+    "testEnv": false,
+    "_comment_TestOznaka": "oznaka za testiranje slanja SEUP-a",
+    "TestOznaka": "LAMATESTOZNAKA",
+    "_comment_TestEmail": "email na koji ce se koristiti za testiranje slanja SEUP-a email-om",
+    "TestEmail": "toma.pavicic@lama.hr",
+    "_comment_TestAdresaPristupneTocke": "adresa pristupne tocke za testiranje slanja SEUP-a",
+    "TestAdresaPristupneTocke": "http://localhost:3001/seup/recieve"
+  }
+}
