@@ -14,7 +14,7 @@ interface Post {
   user_id: number;
   title: string;
   body: string;
-  last_updated?: string;
+  last_update?: string;
 }
 
 @Component({
@@ -29,6 +29,12 @@ export class AppComponent {
     name: '',
     email: ''
   };
+  newPost: Post = {
+    user_id: 0,
+    title: '',
+    body: ''
+  };
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -62,6 +68,32 @@ export class AppComponent {
   
       // Reset the form
       form.reset();
+    });
+  }
+  onSubmitPost(form: NgForm) {
+    // Create the new post object
+    const newPost: Post = {
+      user_id: form.value.user_id,
+      title: form.value.title,
+      body: form.value.body
+    };
+  
+    // Send a POST request to create the new post
+    this.http.post<Post>('http://localhost:3000/posts', newPost).subscribe(createdPost => {
+      // Add the created post to the local list
+      this.posts.push(createdPost);
+  
+      // Update the posts for the user who created the new post
+      const user = this.users.find(user => user.id === newPost.user_id);
+      if (user) {
+        if (!user.posts) {
+          user.posts = [];
+        }
+        user.posts.push(createdPost);
+      }
+  
+      // Reset the form
+      form.resetForm();
     });
   }
   

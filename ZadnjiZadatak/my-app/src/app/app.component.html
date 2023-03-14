@@ -1,34 +1,51 @@
 <h1>Users</h1>
-<ul>
-  <li class="user-card" *ngFor="let user of users">
+<div class="users-container">
+  <div class="user-card" *ngFor="let user of users">
     <h2>{{ user.name }}</h2>
     <p>Email: {{ user.email }}</p>
     <h3>Posts:</h3>
-    <ul>
+    <ul class="posts-list">
       <li class="post-card" *ngFor="let post of user.posts">
         <h4>Title : {{ post.title }}</h4>
         <p>Body: {{ post.body }}</p>
-        <p>Last updated :{{ post.last_updated }}</p>
+        <p>Last update: {{ post.last_update }}</p>
       </li>
     </ul>
-  </li>
-</ul>
-
-<h2>Add New User</h2>
-
-<form #newUserForm="ngForm" (ngSubmit)="onSubmitUser(newUserForm)">
-  <div>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required [(ngModel)]="newUser.name">
   </div>
+</div>
 
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required [(ngModel)]="newUser.email">
-  </div>
 
-  <button type="submit">Save</button>
-</form>
+<h2>Add New User and Post</h2>
+<div class="forms-container">
+  <form #newUserForm="ngForm" class="form user-form" (ngSubmit)="onSubmitUser(newUserForm)">
+    <h3>Add New User</h3>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required [(ngModel)]="newUser.name">
+    </div>
 
-<br>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required [(ngModel)]="newUser.email">
+    </div>
 
+    <button type="submit">Save</button>
+  </form>
+
+  <form (ngSubmit)="onSubmitPost(postForm)" #postForm="ngForm" class="form post-form">
+    <h3>Add New Post</h3>
+    <div class="form-group">
+      <label for="user_id">User ID:</label>
+      <input type="number" class="form-control" id="user_id" name="user_id" [(ngModel)]="newPost.user_id" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newPost.title" required>
+    </div>
+    <div class="form-group">
+      <label for="body">Body:</label>
+      <textarea class="form-control" id="body" name="body" [(ngModel)]="newPost.body" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
